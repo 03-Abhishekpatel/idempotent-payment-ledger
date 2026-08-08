@@ -28,7 +28,7 @@ class LedgerEntry:
     def signed_amount(self) -> Decimal:
         return -self.amount if self.is_debit else self.amount
 
-    def bound_to_transaction(self, transaction_id: uuid.UUID) -> LedgerEntry:
+    def bound_to_transaction(self, transaction_id: uuid.UUID):
 
         return LedgerEntry(
             account = self.account,
