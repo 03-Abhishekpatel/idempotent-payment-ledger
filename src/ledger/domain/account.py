@@ -11,13 +11,13 @@ class AccountType(str, Enum):
 class Account:
 
     def __init__(self, name: str, account_type: AccountType, account_id: uuid.UUID | None = None):
-        if not name and name.strip():
+        if not name or not name.strip():
             raise ValueError("Account name must not be empty")
         
         if not isinstance(account_type, AccountType):
             raise TypeError(f"account_type must be an AccountType, got {type(account_type)!r}")    
 
-        if not isinstance(account_id, uuid):
+        if account_id and not isinstance(account_id, uuid.UUID):
             raise TypeError(f"account_id must be an uuid type, get {type(account_id)!r}")
         
         self.id = account_id or uuid.uuid4() 

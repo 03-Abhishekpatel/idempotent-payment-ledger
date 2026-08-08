@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from entry import LedgerEntry 
+from .entry import LedgerEntry 
 import uuid
 from .exceptions import InsufficientEntriesError, UnbalancedTransactionError
 from decimal import Decimal
@@ -23,7 +23,7 @@ class Transaction:
         total = ZERO
 
         for entry in ledger_entries:
-            total += entry.signed_amount
+            total += entry.signed_amount()
 
         if total != ZERO:
             raise UnbalancedTransactionError(f"Transaction ledger entry sum to {total}, expected 0")
@@ -39,8 +39,3 @@ class Transaction:
             f"Transaction(id={self.id}, description={self.description}), "
             f"entries={len(self.ledger_entries)}"
         )
-
-
-
-    
-    
