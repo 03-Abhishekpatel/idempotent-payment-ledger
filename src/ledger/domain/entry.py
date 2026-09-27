@@ -31,10 +31,10 @@ class LedgerEntry:
     def bound_to_transaction(self, transaction_id: uuid.UUID):
 
         return LedgerEntry(
-            account = self.account,
-            amount = self.amount, 
-            is_debit = self.is_debit, 
+            account=self.account,
+            amount=self.amount,
+            is_debit=self.is_debit,
             transaction_id=transaction_id,
-            id = self.id
+            id=self.id,
         )
     

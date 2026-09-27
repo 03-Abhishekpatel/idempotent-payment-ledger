@@ -71,3 +71,17 @@ def test_entry_bounded_to_transaction():
     assert entry.transaction_id is None
     assert bound.transaction_id == new_transaction_id
     assert bound.id == entry.id
+
+
+def test_ledger_entry_model_uses_entry_id_and_account_foreign_key():
+    from ledger.infrastructure.db.mappers import ledger_entry_to_model
+    from ledger.infrastructure.db.models import LedgerEntryModel
+
+    account = Account("Test Account", AccountType.ASSET)
+    entry = LedgerEntry(account=account, amount=Decimal("100"), is_debit=True)
+
+    model = ledger_entry_to_model(entry)
+
+    assert isinstance(model, LedgerEntryModel)
+    assert model.id == entry.id
+    assert model.account_id == account.id

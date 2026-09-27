@@ -1,4 +1,4 @@
-from ledger.domain.account import Account, AccountType
+from src.ledger.domain.account import Account, AccountType
 import uuid
 import pytest
 
