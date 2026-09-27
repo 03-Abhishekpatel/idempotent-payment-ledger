@@ -12,7 +12,7 @@ class Transaction:
     def __init__(self,
                 ledger_entries: list[LedgerEntry],
                 description: str,
-                transaction_id: uuid.UUID | None = None,
+                id: uuid.UUID | None = None,
                 timestamp: datetime | None = None
             ):
 
@@ -29,7 +29,7 @@ class Transaction:
             raise UnbalancedTransactionError(f"Transaction ledger entry sum to {total}, expected 0")
         
 
-        self.id = transaction_id or uuid.uuid4()
+        self.id = id or uuid.uuid4()
         self.timestamp = timestamp or datetime.now(UTC)
         self.description = description 
         self.ledger_entries = tuple(entry.bound_to_transaction(self.id) for entry in ledger_entries) 
